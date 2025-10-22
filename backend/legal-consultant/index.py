@@ -1,6 +1,7 @@
 import json
 import os
 import requests
+import psycopg2
 from typing import Dict, Any
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
@@ -110,6 +111,22 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'body': json.dumps({'error': 'Не удалось получить ответ от YandexGPT'}),
                 'isBase64Encoded': False
             }
+        
+        db_url = os.environ.get('DATABASE_URL')
+        if db_url:
+            try:
+                conn = psycopg2.connect(db_url)
+                cur = conn.cursor()
+                user_ip = event.get('requestContext', {}).get('identity', {}).get('sourceIp', 'unknown')
+                cur.execute(
+                    "INSERT INTO consultations (question, answer, user_ip, request_id) VALUES (%s, %s, %s, %s)",
+                    (question, answer, user_ip, context.request_id)
+                )
+                conn.commit()
+                cur.close()
+                conn.close()
+            except Exception:
+                pass
         
         return {
             'statusCode': 200,

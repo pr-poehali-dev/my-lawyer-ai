@@ -11,12 +11,33 @@ export default function Index() {
   const [answer, setAnswer] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleAskQuestion = () => {
+  const handleAskQuestion = async () => {
+    if (!question.trim()) return;
+    
     setIsLoading(true);
-    setTimeout(() => {
-      setAnswer('Спасибо за ваш вопрос! Это демо-версия AI-консультанта. В полной версии здесь будет профессиональная юридическая консультация на основе российского законодательства.');
+    setAnswer('');
+    
+    try {
+      const response = await fetch('https://functions.poehali.dev/226341c0-24a6-474d-9082-b2069774c6f8', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ question: question.trim() }),
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok) {
+        setAnswer(data.answer);
+      } else {
+        setAnswer(`Ошибка: ${data.error || 'Не удалось получить ответ'}`);
+      }
+    } catch (error) {
+      setAnswer('Ошибка соединения с сервером. Пожалуйста, попробуйте позже.');
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
   };
 
   const services = [
