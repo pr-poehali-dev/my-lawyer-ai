@@ -157,15 +157,22 @@ export default function Index() {
                 <Button 
                   onClick={handleAskQuestion} 
                   disabled={!question.trim() || isLoading}
-                  className="w-full"
+                  className="w-full gap-2"
                 >
+                  {isLoading && <Icon name="Loader2" size={16} className="animate-spin" />}
                   {isLoading ? 'Анализирую законодательство...' : 'Получить консультацию'}
                 </Button>
+                {isLoading && (
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Icon name="Clock" size={14} />
+                    <span>Это может занять 5-15 секунд...</span>
+                  </div>
+                )}
                 {answer && (
-                  <div className="p-4 bg-muted rounded-lg animate-fade-in">
-                    <div className="flex items-start gap-2">
-                      <Icon name="Scale" size={20} className="text-primary mt-1" />
-                      <p className="text-sm whitespace-pre-wrap">{answer}</p>
+                  <div className="p-6 bg-gradient-to-br from-muted/50 to-muted rounded-xl border animate-fade-in max-h-[500px] overflow-y-auto">
+                    <div className="flex items-start gap-3">
+                      <Icon name="Scale" size={24} className="text-primary mt-1 flex-shrink-0" />
+                      <div className="text-sm leading-relaxed whitespace-pre-wrap break-words">{answer}</div>
                     </div>
                   </div>
                 )}
