@@ -8,6 +8,7 @@ import Icon from '@/components/ui/icon';
 export default function Index() {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
+  const [sources, setSources] = useState<Array<{code: string, article: string, title?: string, url: string}>>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleAskQuestion = async () => {
@@ -15,6 +16,7 @@ export default function Index() {
     
     setIsLoading(true);
     setAnswer('');
+    setSources([]);
     
     try {
       const response = await fetch('https://functions.poehali.dev/34de8437-f9f6-4a45-a537-2b1cb7ea60ca', {
@@ -29,6 +31,7 @@ export default function Index() {
       
       if (response.ok) {
         setAnswer(data.answer);
+        setSources(data.sources || []);
       } else {
         setAnswer(`Ошибка: ${data.error || 'Не удалось получить ответ'}`);
       }
@@ -75,7 +78,7 @@ export default function Index() {
   const faqItems = [
     {
       question: 'Как работает ИИ "Мой юрист"?',
-      answer: 'Это дообученная модель YandexGPT, специализированная на российском законодательстве. ИИ анализирует ваш вопрос и дает юридическую консультацию на основе актуальных законов и практики.'
+      answer: 'ИИ использует технологию RAG (Retrieval-Augmented Generation) - сначала находит релевантные статьи законов в базе данных, затем YandexGPT формирует ответ на основе этих конкретных статей. Все ответы основаны на реальных источниках российского законодательства с указанием конкретных номеров статей.'
     },
     {
       question: 'Бесплатно ли пользоваться сервисом?',
@@ -169,11 +172,39 @@ export default function Index() {
                   </div>
                 )}
                 {answer && (
-                  <div className="p-6 bg-gradient-to-br from-muted/50 to-muted rounded-xl border animate-fade-in max-h-[500px] overflow-y-auto">
-                    <div className="flex items-start gap-3">
-                      <Icon name="Scale" size={24} className="text-primary mt-1 flex-shrink-0" />
-                      <div className="text-sm leading-relaxed whitespace-pre-wrap break-words">{answer}</div>
+                  <div className="space-y-4">
+                    <div className="p-6 bg-gradient-to-br from-muted/50 to-muted rounded-xl border animate-fade-in max-h-[500px] overflow-y-auto">
+                      <div className="flex items-start gap-3">
+                        <Icon name="Scale" size={24} className="text-primary mt-1 flex-shrink-0" />
+                        <div className="text-sm leading-relaxed whitespace-pre-wrap break-words">{answer}</div>
+                      </div>
                     </div>
+                    
+                    {sources.length > 0 && (
+                      <div className="p-4 bg-accent/30 rounded-lg border border-accent">
+                        <div className="flex items-center gap-2 mb-3">
+                          <Icon name="BookOpen" size={18} className="text-primary" />
+                          <h3 className="font-semibold text-sm">Источники:</h3>
+                        </div>
+                        <div className="space-y-2">
+                          {sources.map((source, idx) => (
+                            <a
+                              key={idx}
+                              href={source.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-start gap-2 text-sm p-2 rounded hover:bg-accent/50 transition-colors group"
+                            >
+                              <Icon name="ExternalLink" size={14} className="mt-0.5 flex-shrink-0 text-muted-foreground group-hover:text-primary" />
+                              <div>
+                                <span className="font-medium">{source.code} Статья {source.article}</span>
+                                {source.title && <span className="text-muted-foreground"> - {source.title}</span>}
+                              </div>
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
               </CardContent>
