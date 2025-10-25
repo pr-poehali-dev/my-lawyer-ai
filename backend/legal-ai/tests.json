@@ -1,0 +1,32 @@
+{
+  "tests": [
+    {
+      "name": "Test OPTIONS request for CORS",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Test legal question",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "question": "Какой срок исковой давности по гражданским делам?"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "answer": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Test empty question",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "question": ""
+      },
+      "expectedStatus": 400
+    }
+  ]
+}
