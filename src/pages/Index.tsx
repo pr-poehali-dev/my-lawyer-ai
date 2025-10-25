@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -18,7 +17,7 @@ export default function Index() {
     setAnswer('');
     
     try {
-      const response = await fetch('https://functions.poehali.dev/226341c0-24a6-474d-9082-b2069774c6f8', {
+      const response = await fetch('/api/assistant', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,65 +33,65 @@ export default function Index() {
         setAnswer(`Ошибка: ${data.error || 'Не удалось получить ответ'}`);
       }
     } catch (error) {
-      setAnswer('Ошибка соединения с сервером. Пожалуйста, попробуйте позже.');
+      setAnswer('Ошибка соединения. Пожалуйста, попробуйте позже.');
     } finally {
       setIsLoading(false);
     }
   };
 
-  const services = [
+  const features = [
     {
-      icon: 'Scale',
-      title: 'Гражданское право',
-      description: 'Консультации по гражданским спорам, защита ваших прав и интересов'
+      icon: 'MessageSquare',
+      title: 'Мгновенные ответы',
+      description: 'Получайте ответы на любые вопросы за считанные секунды'
     },
     {
-      icon: 'Briefcase',
-      title: 'Корпоративное право',
-      description: 'Юридическое сопровождение бизнеса, договоры, регистрация компаний'
+      icon: 'Brain',
+      title: 'Умный помощник',
+      description: 'ИИ понимает контекст и дает точные рекомендации'
     },
     {
-      icon: 'Home',
-      title: 'Недвижимость',
-      description: 'Сделки с недвижимостью, оформление документов, споры'
+      icon: 'Clock',
+      title: 'Доступно 24/7',
+      description: 'Помощник работает круглосуточно без выходных'
     },
     {
-      icon: 'Users',
-      title: 'Семейное право',
-      description: 'Разводы, алименты, раздел имущества, опека'
+      icon: 'Shield',
+      title: 'Конфиденциально',
+      description: 'Ваши данные надежно защищены и не передаются третьим лицам'
     },
     {
-      icon: 'FileText',
-      title: 'Трудовое право',
-      description: 'Защита трудовых прав, споры с работодателем, контракты'
+      icon: 'Zap',
+      title: 'Быстро и эффективно',
+      description: 'Экономьте время — получайте решения мгновенно'
     },
     {
-      icon: 'ShieldCheck',
-      title: 'Уголовное право',
-      description: 'Защита в уголовных делах, представительство в суде'
+      icon: 'Heart',
+      title: 'Простота использования',
+      description: 'Интуитивный интерфейс, понятный каждому'
     }
   ];
 
   const faqItems = [
     {
-      question: 'Как работает AI-консультант?',
-      answer: 'Наш AI-консультант обучен на базе российского законодательства и дает первичные консультации по юридическим вопросам. Для сложных случаев мы рекомендуем личную консультацию с юристом.'
+      question: 'Как работает ИИ-помощник?',
+      answer: 'Наш ИИ-помощник использует современные технологии искусственного интеллекта для анализа вашего вопроса и предоставления точного ответа. Он обучен на большом объеме данных и постоянно совершенствуется.'
     },
     {
-      question: 'Сколько стоит консультация?',
-      answer: 'AI-консультант предоставляет бесплатные базовые ответы. Профессиональная консультация с юристом стоит от 3000 рублей в зависимости от сложности вопроса.'
+      question: 'Бесплатно ли пользоваться помощником?',
+      answer: 'Да, базовые консультации полностью бесплатны. Вы можете задавать неограниченное количество вопросов.'
     },
     {
       question: 'Как быстро я получу ответ?',
-      answer: 'AI-консультант отвечает мгновенно. Для записи на личную консультацию с юристом обычно требуется 1-2 рабочих дня.'
+      answer: 'ИИ-помощник отвечает практически мгновенно — обычно это занимает всего несколько секунд.'
     },
     {
-      question: 'Какие гарантии вы предоставляете?',
-      answer: 'Мы гарантируем конфиденциальность, профессионализм и соблюдение адвокатской этики. Все консультации проводятся опытными юристами с практикой от 5 лет.'
+      question: 'Насколько точны ответы?',
+      answer: 'ИИ-помощник дает максимально точные ответы на основе имеющихся данных. Однако для важных решений мы рекомендуем дополнительно проконсультироваться со специалистом.'
     },
     {
-      question: 'Можно ли получить консультацию онлайн?',
-      answer: 'Да, мы проводим консультации онлайн через видеосвязь, телефон или в чате. Также возможны личные встречи в офисе.'
+      question: 'Какие вопросы можно задавать?',
+      answer: 'Вы можете задавать любые вопросы — от повседневных советов до помощи в решении сложных задач. ИИ-помощник адаптируется под любую тему.'
     }
   ];
 
@@ -101,17 +100,16 @@ export default function Index() {
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Icon name="Scale" size={32} className="text-primary" />
-            <span className="text-2xl font-bold text-primary">Мой юрист</span>
+            <Icon name="Sparkles" size={32} className="text-primary" />
+            <span className="text-2xl font-bold text-primary">ИИ Помощник</span>
           </div>
           <nav className="hidden md:flex items-center gap-6">
             <a href="#home" className="text-foreground hover:text-primary transition-colors">Главная</a>
-            <a href="#services" className="text-foreground hover:text-primary transition-colors">Услуги</a>
+            <a href="#features" className="text-foreground hover:text-primary transition-colors">Возможности</a>
             <a href="#faq" className="text-foreground hover:text-primary transition-colors">FAQ</a>
-            <a href="#about" className="text-foreground hover:text-primary transition-colors">О компании</a>
-            <a href="#contacts" className="text-foreground hover:text-primary transition-colors">Контакты</a>
+            <a href="#about" className="text-foreground hover:text-primary transition-colors">О сервисе</a>
           </nav>
-          <Button variant="default">Консультация</Button>
+          <Button variant="default">Начать общение</Button>
         </div>
       </header>
 
@@ -120,11 +118,11 @@ export default function Index() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
-                AI-консультант по российскому законодательству
+                Ваш личный ИИ-помощник
               </h1>
               <p className="text-xl text-muted-foreground mb-8">
-                Получите мгновенные ответы на юридические вопросы от искусственного интеллекта, 
-                обученного на базе российского законодательства
+                Получайте мгновенные ответы на любые вопросы с помощью искусственного интеллекта. 
+                Быстро, удобно и доступно 24/7
               </p>
               <div className="flex gap-4">
                 <Button size="lg" className="gap-2">
@@ -137,16 +135,16 @@ export default function Index() {
             <Card className="shadow-xl">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Icon name="Sparkles" size={24} className="text-primary" />
+                  <Icon name="Bot" size={24} className="text-primary" />
                   Задайте ваш вопрос
                 </CardTitle>
                 <CardDescription>
-                  AI-консультант ответит на основе российского законодательства
+                  ИИ-помощник готов помочь вам прямо сейчас
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <Textarea
-                  placeholder="Опишите вашу юридическую ситуацию..."
+                  placeholder="Опишите ваш вопрос или ситуацию..."
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}
                   rows={4}
@@ -157,13 +155,13 @@ export default function Index() {
                   disabled={!question.trim() || isLoading}
                   className="w-full"
                 >
-                  {isLoading ? 'Анализирую...' : 'Получить консультацию'}
+                  {isLoading ? 'Думаю...' : 'Получить ответ'}
                 </Button>
                 {answer && (
                   <div className="p-4 bg-muted rounded-lg animate-fade-in">
                     <div className="flex items-start gap-2">
                       <Icon name="Bot" size={20} className="text-primary mt-1" />
-                      <p className="text-sm">{answer}</p>
+                      <p className="text-sm whitespace-pre-wrap">{answer}</p>
                     </div>
                   </div>
                 )}
@@ -173,23 +171,23 @@ export default function Index() {
         </div>
       </section>
 
-      <section id="services" className="py-20 px-4 bg-white">
+      <section id="features" className="py-20 px-4 bg-white">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-foreground mb-4">Юридические услуги</h2>
+            <h2 className="text-4xl font-bold text-foreground mb-4">Возможности помощника</h2>
             <p className="text-xl text-muted-foreground">
-              Профессиональная помощь по всем направлениям права
+              Современные технологии ИИ для решения ваших задач
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service, index) => (
+            {features.map((feature, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                    <Icon name={service.icon} size={24} className="text-primary" />
+                    <Icon name={feature.icon} size={24} className="text-primary" />
                   </div>
-                  <CardTitle className="text-xl">{service.title}</CardTitle>
-                  <CardDescription>{service.description}</CardDescription>
+                  <CardTitle className="text-xl">{feature.title}</CardTitle>
+                  <CardDescription>{feature.description}</CardDescription>
                 </CardHeader>
               </Card>
             ))}
@@ -202,14 +200,14 @@ export default function Index() {
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-foreground mb-4">Частые вопросы</h2>
             <p className="text-xl text-muted-foreground">
-              Ответы на популярные вопросы о наших услугах
+              Ответы на популярные вопросы о сервисе
             </p>
           </div>
           <Accordion type="single" collapsible className="space-y-4">
             {faqItems.map((item, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="bg-white border rounded-lg px-6">
-                <AccordionTrigger className="text-left hover:no-underline">
-                  <span className="font-semibold">{item.question}</span>
+              <AccordionItem key={index} value={`item-${index}`} className="bg-white rounded-lg px-6 border">
+                <AccordionTrigger className="text-lg font-semibold hover:no-underline">
+                  {item.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground">
                   {item.answer}
@@ -221,100 +219,68 @@ export default function Index() {
       </section>
 
       <section id="about" className="py-20 px-4 bg-white">
-        <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-8">
-            <h2 className="text-4xl font-bold text-foreground mb-4">О компании</h2>
-          </div>
-          <div className="prose prose-lg mx-auto text-muted-foreground">
-            <p className="text-center text-lg">
-              «Мой юрист» — это инновационная юридическая компания, которая объединяет 
-              традиционный профессионализм с современными технологиями искусственного интеллекта. 
-              Наша команда опытных юристов использует AI для предоставления быстрых и точных 
-              консультаций по российскому законодательству.
-            </p>
-            <div className="grid md:grid-cols-3 gap-8 mt-12 not-prose">
-              <Card>
-                <CardHeader className="text-center">
-                  <div className="text-4xl font-bold text-primary mb-2">15+</div>
-                  <CardTitle>Лет опыта</CardTitle>
-                </CardHeader>
-              </Card>
-              <Card>
-                <CardHeader className="text-center">
-                  <div className="text-4xl font-bold text-primary mb-2">5000+</div>
-                  <CardTitle>Довольных клиентов</CardTitle>
-                </CardHeader>
-              </Card>
-              <Card>
-                <CardHeader className="text-center">
-                  <div className="text-4xl font-bold text-primary mb-2">98%</div>
-                  <CardTitle>Выигранных дел</CardTitle>
-                </CardHeader>
-              </Card>
+        <div className="container mx-auto max-w-4xl text-center">
+          <h2 className="text-4xl font-bold text-foreground mb-6">О сервисе</h2>
+          <p className="text-xl text-muted-foreground mb-8">
+            Мы создали умного помощника на основе передовых технологий искусственного интеллекта, 
+            чтобы сделать получение информации простым и удобным для каждого. 
+            Наша миссия — помогать людям быстро находить ответы и решать повседневные задачи.
+          </p>
+          <div className="flex flex-wrap gap-8 justify-center items-center pt-8">
+            <div className="text-center">
+              <div className="text-4xl font-bold text-primary mb-2">24/7</div>
+              <div className="text-muted-foreground">Работает всегда</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl font-bold text-primary mb-2">∞</div>
+              <div className="text-muted-foreground">Вопросов без лимита</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl font-bold text-primary mb-2">&lt; 5 сек</div>
+              <div className="text-muted-foreground">Скорость ответа</div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="contacts" className="py-20 px-4 bg-gradient-to-b from-gray-50 to-primary/5">
-        <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-foreground mb-4">Контакты</h2>
-            <p className="text-xl text-muted-foreground">
-              Свяжитесь с нами для получения консультации
-            </p>
+      <footer className="bg-gray-900 text-white py-12 px-4">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid md:grid-cols-3 gap-8">
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <Icon name="Sparkles" size={28} className="text-primary" />
+                <span className="text-xl font-bold">ИИ Помощник</span>
+              </div>
+              <p className="text-gray-400">
+                Ваш надежный ИИ-помощник для решения любых вопросов
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Навигация</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#home" className="hover:text-white transition-colors">Главная</a></li>
+                <li><a href="#features" className="hover:text-white transition-colors">Возможности</a></li>
+                <li><a href="#faq" className="hover:text-white transition-colors">FAQ</a></li>
+                <li><a href="#about" className="hover:text-white transition-colors">О сервисе</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Контакты</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li className="flex items-center gap-2">
+                  <Icon name="Mail" size={16} />
+                  <span>support@ai-assistant.ru</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Icon name="Phone" size={16} />
+                  <span>+7 (800) 555-35-35</span>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card>
-              <CardHeader>
-                <CardTitle>Наши контакты</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <Icon name="Phone" size={20} className="text-primary mt-1" />
-                  <div>
-                    <p className="font-semibold">Телефон</p>
-                    <p className="text-muted-foreground">+7 (495) 123-45-67</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Icon name="Mail" size={20} className="text-primary mt-1" />
-                  <div>
-                    <p className="font-semibold">Email</p>
-                    <p className="text-muted-foreground">info@moi-yurist.ru</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Icon name="MapPin" size={20} className="text-primary mt-1" />
-                  <div>
-                    <p className="font-semibold">Адрес</p>
-                    <p className="text-muted-foreground">Москва, ул. Тверская, д. 1</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>Напишите нам</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <Input placeholder="Ваше имя" />
-                <Input type="email" placeholder="Email" />
-                <Textarea placeholder="Сообщение" rows={4} />
-                <Button className="w-full">Отправить</Button>
-              </CardContent>
-            </Card>
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <p>© 2024 ИИ Помощник. Все права защищены.</p>
           </div>
-        </div>
-      </section>
-
-      <footer className="bg-primary text-primary-foreground py-8 px-4">
-        <div className="container mx-auto max-w-6xl text-center">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Icon name="Scale" size={28} />
-            <span className="text-xl font-bold">Мой юрист</span>
-          </div>
-          <p className="text-sm opacity-90">© 2024 Мой юрист. Все права защищены.</p>
         </div>
       </footer>
     </div>
