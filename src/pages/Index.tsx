@@ -17,7 +17,7 @@ export default function Index() {
     setAnswer('');
     
     try {
-      const response = await fetch('/api/assistant', {
+      const response = await fetch('https://functions.poehali.dev/34de8437-f9f6-4a45-a537-2b1cb7ea60ca', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
