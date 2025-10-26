@@ -376,7 +376,7 @@ export default function Index() {
           <div className="grid md:grid-cols-3 gap-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <Icon name="Scale" size={30} className="text-primary" />
+                <Icon name="Scale" size={34} className="text-primary" />
                 <span className="text-xl font-bold">Мой юрист</span>
               </div>
               <p className="text-gray-500">
