@@ -1,0 +1,42 @@
+{
+  "tests": [
+    {
+      "name": "Get statistics",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "stats": "array"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Load GK articles",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "code": "GK"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true,
+        "code": "GK"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Load TK articles",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "code": "TK"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true,
+        "code": "TK"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

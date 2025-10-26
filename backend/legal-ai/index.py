@@ -21,7 +21,7 @@ def search_legal_articles(question: str, db_url: str, limit: int = 5) -> List[Di
             article_text,
             source_url,
             ts_rank(to_tsvector('russian', article_text || ' ' || COALESCE(article_title, '')), plainto_tsquery('russian', %s)) as relevance
-        FROM legal_documents
+        FROM t_p56644526_my_lawyer_ai.legal_documents
         WHERE to_tsvector('russian', article_text || ' ' || COALESCE(article_title, '')) @@ plainto_tsquery('russian', %s)
         ORDER BY relevance DESC
         LIMIT %s
