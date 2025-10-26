@@ -132,7 +132,7 @@ export default function Index() {
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Icon name="Scale" size={32} className="text-primary" />
+            <Icon name="Scale" size={37} className="text-primary" />
             <span className="text-2xl font-bold text-primary">Мой юрист</span>
           </div>
           <nav className="hidden md:flex items-center gap-6">
