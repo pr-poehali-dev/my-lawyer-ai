@@ -25,6 +25,7 @@ export default function Index() {
   const [isLoading, setIsLoading] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [showTemplates, setShowTemplates] = useState(false);
+  const [history, setHistory] = useState<Array<{question: string; answer: string; timestamp: number}>>([]);
 
   const templates = [
     {
@@ -151,6 +152,13 @@ export default function Index() {
       if (response.ok) {
         setAnswer(data.answer);
         setSources(data.sources || []);
+        
+        const newHistory = [
+          { question: question.trim(), answer: data.answer, timestamp: Date.now() },
+          ...history.slice(0, 9)
+        ];
+        setHistory(newHistory);
+        localStorage.setItem('legal_history', JSON.stringify(newHistory));
       } else {
         setAnswer(`Ошибка: ${data.error || "Не удалось получить ответ"}`);
       }
