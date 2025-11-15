@@ -202,8 +202,8 @@ export default function Index() {
                   placeholder="Опишите вашу юридическую ситуацию..."
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}
-                  rows={4}
-                  className="resize-none"
+                  rows={6}
+                  className="resize-none min-h-[150px]"
                 />
                 <Button
                   onClick={handleAskQuestion}
