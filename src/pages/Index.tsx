@@ -23,6 +23,109 @@ export default function Index() {
     Array<{ code: string; article: string; title?: string; url: string }>
   >([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  const [showTemplates, setShowTemplates] = useState(false);
+
+  const templates = [
+    {
+      title: "Трудовой спор",
+      icon: "Briefcase",
+      template: `Ситуация: [опишите конфликт с работодателем]
+
+Моя должность: [ваша должность]
+Дата возникновения проблемы: [дата]
+
+Что произошло:
+- [опишите события по порядку]
+- [укажите важные детали]
+
+Есть ли документы: [договор/приказ/переписка]
+
+Что хочу получить: [восстановление/компенсация/другое]`
+    },
+    {
+      title: "Семейное право",
+      icon: "Users",
+      template: `Ситуация: [развод/алименты/раздел имущества]
+
+Состояние брака: [в браке/разведены/разводимся]
+Наличие детей: [количество, возраст]
+
+Суть вопроса:
+- [опишите ситуацию]
+- [укажите спорные моменты]
+
+Что нужно решить: [ваша цель]`
+    },
+    {
+      title: "Права потребителя",
+      icon: "ShoppingCart",
+      template: `Товар/услуга: [что приобрели]
+Дата покупки: [дата]
+Стоимость: [сумма]
+
+Проблема:
+- [что не так с товаром/услугой]
+- [когда обнаружили проблему]
+
+Действия продавца: [что ответил магазин]
+
+Что хочу: [возврат денег/обмен/ремонт]`
+    },
+    {
+      title: "ДТП и страховка",
+      icon: "Car",
+      template: `Дата ДТП: [дата]
+Место: [адрес]
+
+Участники:
+- Я: [ваша роль - водитель/пассажир/пешеход]
+- Виновник: [кто виноват по вашему мнению]
+
+Повреждения:
+- [опишите ущерб автомобилю/здоровью]
+
+Документы: [протокол/европротокол/справки]
+
+Вопрос: [что нужно сделать]`
+    },
+    {
+      title: "Недвижимость",
+      icon: "Home",
+      template: `Объект: [квартира/дом/земля]
+Город: [укажите город]
+
+Ситуация:
+- [покупка/продажа/аренда/спор]
+- [опишите проблему]
+
+Стороны сделки: [продавец/покупатель/арендодатель]
+Документы: [договор/расписка/другое]
+
+Вопрос: [что вас беспокоит]`
+    },
+    {
+      title: "Административное нарушение",
+      icon: "AlertCircle",
+      template: `Нарушение: [ПДД/другое]
+Дата: [дата]
+Место: [где произошло]
+
+Обстоятельства:
+- [опишите ситуацию]
+- [были ли свидетели]
+
+Протокол: [составлен/не составлен]
+Штраф: [сумма, если известна]
+
+Вопрос: [можно ли оспорить/как уменьшить]`
+    }
+  ];
+
+  const useTemplate = (template: string) => {
+    setQuestion(template);
+    setShowTemplates(false);
+  };
 
   const handleAskQuestion = async () => {
     if (!question.trim()) return;
@@ -198,12 +301,52 @@ export default function Index() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
+                <div className="flex gap-2 mb-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setShowTemplates(!showTemplates)}
+                    className="gap-2"
+                  >
+                    <Icon name="FileText" size={16} />
+                    {showTemplates ? "Скрыть шаблоны" : "Использовать шаблон"}
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setIsFullScreen(!isFullScreen)}
+                    className="gap-2"
+                  >
+                    <Icon name={isFullScreen ? "Minimize2" : "Maximize2"} size={16} />
+                    {isFullScreen ? "Свернуть" : "Развернуть"}
+                  </Button>
+                </div>
+
+                {showTemplates && (
+                  <div className="grid grid-cols-2 gap-2 p-4 bg-muted/50 rounded-lg border animate-fade-in">
+                    {templates.map((tmpl, idx) => (
+                      <Button
+                        key={idx}
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => useTemplate(tmpl.template)}
+                        className="justify-start gap-2 h-auto py-2"
+                      >
+                        <Icon name={tmpl.icon as any} size={16} className="flex-shrink-0" />
+                        <span className="text-xs">{tmpl.title}</span>
+                      </Button>
+                    ))}
+                  </div>
+                )}
+
                 <Textarea
-                  placeholder="Опишите вашу юридическую ситуацию..."
+                  placeholder="Опишите вашу юридическую ситуацию или выберите шаблон выше..."
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}
                   rows={6}
-                  className="resize-none min-h-[150px]"
+                  className={`resize-none transition-all ${
+                    isFullScreen ? "min-h-[400px]" : "min-h-[150px]"
+                  }`}
                 />
                 <Button
                   onClick={handleAskQuestion}
