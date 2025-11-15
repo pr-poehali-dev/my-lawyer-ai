@@ -1,4 +1,6 @@
 {
+  "legal-sync-scheduler": "https://functions.poehali.dev/28c0f928-e8f3-46a6-a3f8-4dcbc08fba02",
+  "legal-sync": "https://functions.poehali.dev/f1c69854-1969-4039-8091-7ea77b37bdec",
   "legal-parser": "https://functions.poehali.dev/fe807173-efe8-497d-a271-8a31d7ea7265",
   "legal-ai": "https://functions.poehali.dev/34de8437-f9f6-4a45-a537-2b1cb7ea60ca"
 }

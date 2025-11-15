@@ -7,17 +7,23 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { useEffect } from "react";
-import { loadAllLegalCodes } from "./utils/loadLegalData";
+import { syncLegalDatabase } from "./utils/loadLegalData";
 
 const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
-    const shouldLoad = localStorage.getItem('legal_codes_loaded');
-    if (!shouldLoad) {
-      console.log('Loading legal codes for the first time...');
-      loadAllLegalCodes().then(() => {
-        localStorage.setItem('legal_codes_loaded', 'true');
+    const lastSync = localStorage.getItem('legal_last_sync');
+    const now = new Date().getTime();
+    const oneDayMs = 24 * 60 * 60 * 1000;
+    
+    if (!lastSync || (now - parseInt(lastSync)) > oneDayMs) {
+      console.log('Syncing legal database from official sources...');
+      syncLegalDatabase().then((result) => {
+        if (result.success) {
+          localStorage.setItem('legal_last_sync', now.toString());
+          console.log('✅ Database synchronized successfully');
+        }
       });
     }
   }, []);
