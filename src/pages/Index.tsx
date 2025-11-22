@@ -29,7 +29,7 @@ export default function Index() {
 
   const templates = [
     {
-      title: "Развод и расторжение брака",
+      title: "Развод",
       icon: "Users",
       template: `Ситуация: [развод через ЗАГС/суд]
 
@@ -46,7 +46,7 @@ export default function Index() {
 Что хочу узнать: [порядок развода/документы/сроки]`
     },
     {
-      title: "Алименты и содержание",
+      title: "Алименты",
       icon: "Heart",
       template: `Ситуация: [взыскание алиментов/изменение размера]
 
@@ -63,7 +63,7 @@ export default function Index() {
 Вопрос: [как взыскать/увеличить/уменьшить]`
     },
     {
-      title: "Раздел имущества супругов",
+      title: "Раздел имущества",
       icon: "Home",
       template: `Состояние брака: [в браке/разведены/разводимся]
 
@@ -80,7 +80,7 @@ export default function Index() {
 Вопрос: [как делится имущество/доли]`
     },
     {
-      title: "Определение места жительства ребенка",
+      title: "Место жительства ребенка",
       icon: "Baby",
       template: `Дети: [количество, возраст каждого]
 
@@ -97,7 +97,7 @@ export default function Index() {
 Вопрос: [порядок определения/права второго родителя]`
     },
     {
-      title: "Лишение родительских прав",
+      title: "Родительские права",
       icon: "ShieldAlert",
       template: `Ребенок: [возраст]
 Отношение: [мать/отец]
@@ -115,7 +115,7 @@ export default function Index() {
 Вопрос: [процедура/последствия/как восстановить]`
     },
     {
-      title: "Пенсии и пособия",
+      title: "Пенсии",
       icon: "Wallet",
       template: `Вид выплаты: [пенсия/пособие/компенсация]
 
@@ -135,7 +135,7 @@ export default function Index() {
 Вопрос: [как получить/увеличить/оспорить отказ]`
     },
     {
-      title: "Льготы и социальная поддержка",
+      title: "Льготы",
       icon: "Gift",
       template: `Категория: [пенсионер/инвалид/многодетная семья/другое]
 
@@ -152,7 +152,7 @@ export default function Index() {
 Что нужно узнать: [конкретный вопрос]`
     },
     {
-      title: "Материнский капитал",
+      title: "Маткапитал",
       icon: "BadgeDollarSign",
       template: `Дети: [количество, год рождения]
 
@@ -388,10 +388,10 @@ export default function Index() {
                         variant="outline"
                         size="sm"
                         onClick={() => useTemplate(tmpl.template)}
-                        className="flex flex-col items-center justify-center gap-2 h-24 py-3 px-2 hover:bg-primary/10 hover:border-primary/40 transition-all overflow-hidden"
+                        className="flex flex-col items-center justify-center gap-2 h-20 py-2 px-2 hover:bg-primary/10 hover:border-primary/40 transition-all"
                       >
-                        <Icon name={tmpl.icon as any} size={24} className="flex-shrink-0 text-primary" />
-                        <span className="text-xs font-medium text-center leading-tight line-clamp-2 w-full px-1">{tmpl.title}</span>
+                        <Icon name={tmpl.icon as any} size={20} className="flex-shrink-0 text-primary" />
+                        <span className="text-[11px] font-medium text-center leading-tight whitespace-nowrap overflow-hidden text-ellipsis max-w-full">{tmpl.title}</span>
                       </Button>
                     ))}
                   </div>
