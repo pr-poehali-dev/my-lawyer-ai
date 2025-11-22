@@ -305,6 +305,12 @@ export default function Index() {
               Направления
             </a>
             <a
+              href="/lawyers"
+              className="text-foreground hover:text-primary transition-colors"
+            >
+              Юристы
+            </a>
+            <a
               href="#faq"
               className="text-foreground hover:text-primary transition-colors"
             >
@@ -375,17 +381,17 @@ export default function Index() {
                 </div>
 
                 {showTemplates && (
-                  <div className="grid grid-cols-2 gap-2 p-4 bg-muted/50 rounded-lg border animate-fade-in">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 p-4 bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl border border-primary/20 animate-fade-in">
                     {templates.map((tmpl, idx) => (
                       <Button
                         key={idx}
-                        variant="ghost"
+                        variant="outline"
                         size="sm"
                         onClick={() => useTemplate(tmpl.template)}
-                        className="justify-start gap-2 h-auto py-2"
+                        className="justify-start gap-2 h-auto py-3 px-3 hover:bg-primary/10 hover:border-primary/40 transition-all"
                       >
-                        <Icon name={tmpl.icon as any} size={16} className="flex-shrink-0" />
-                        <span className="text-xs">{tmpl.title}</span>
+                        <Icon name={tmpl.icon as any} size={18} className="flex-shrink-0 text-primary" />
+                        <span className="text-xs font-medium text-left">{tmpl.title}</span>
                       </Button>
                     ))}
                   </div>
