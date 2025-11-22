@@ -388,10 +388,10 @@ export default function Index() {
                         variant="outline"
                         size="sm"
                         onClick={() => useTemplate(tmpl.template)}
-                        className="justify-start gap-2 h-auto py-3 px-3 hover:bg-primary/10 hover:border-primary/40 transition-all"
+                        className="flex flex-col items-center justify-center gap-2 h-24 py-3 px-2 hover:bg-primary/10 hover:border-primary/40 transition-all"
                       >
-                        <Icon name={tmpl.icon as any} size={18} className="flex-shrink-0 text-primary" />
-                        <span className="text-xs font-medium text-left">{tmpl.title}</span>
+                        <Icon name={tmpl.icon as any} size={24} className="flex-shrink-0 text-primary" />
+                        <span className="text-xs font-medium text-center leading-tight">{tmpl.title}</span>
                       </Button>
                     ))}
                   </div>
