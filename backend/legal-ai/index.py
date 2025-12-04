@@ -104,7 +104,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'isBase64Encoded': False
             }
         
-        api_key = os.environ.get('YANDEX_API_KEY')
+        api_key = os.environ.get('API_KEY') or os.environ.get('APIKEY')
         folder_id = os.environ.get('YANDEX_FOLDER_ID')
         db_url = os.environ.get('DATABASE_URL')
         
