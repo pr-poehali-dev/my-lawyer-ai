@@ -12,7 +12,10 @@ def search_legal_articles(question: str, db_url: str, limit: int = 5) -> List[Di
     conn = psycopg2.connect(db_url)
     cursor = conn.cursor(cursor_factory=RealDictCursor)
     
-    query = '''
+    # Escape single quotes for simple query protocol
+    safe_question = question.replace("'", "''")
+    
+    query = f"""
         SELECT 
             code_name,
             full_name,
@@ -20,14 +23,14 @@ def search_legal_articles(question: str, db_url: str, limit: int = 5) -> List[Di
             article_title,
             article_text,
             source_url,
-            ts_rank(to_tsvector('russian', article_text || ' ' || COALESCE(article_title, '')), plainto_tsquery('russian', %s)) as relevance
+            ts_rank(to_tsvector('russian', article_text || ' ' || COALESCE(article_title, '')), plainto_tsquery('russian', '{safe_question}')) as relevance
         FROM t_p56644526_my_lawyer_ai.legal_documents
-        WHERE to_tsvector('russian', article_text || ' ' || COALESCE(article_title, '')) @@ plainto_tsquery('russian', %s)
+        WHERE to_tsvector('russian', article_text || ' ' || COALESCE(article_title, '')) @@ plainto_tsquery('russian', '{safe_question}')
         ORDER BY relevance DESC
-        LIMIT %s
-    '''
+        LIMIT {limit}
+    """
     
-    cursor.execute(query, (question, question, limit))
+    cursor.execute(query)
     results = cursor.fetchall()
     
     cursor.close()
