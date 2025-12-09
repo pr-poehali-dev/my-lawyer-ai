@@ -41,7 +41,7 @@ export default function Index() {
 - [сроки аренды]
 - [размер арендной платы]
 
-Вопрос: [порядок оформления/права и обязанности/споры]`
+Вопрос: [порядок оформления/права и обязанности/споры]`,
     },
     {
       title: "Покупка земли",
@@ -56,7 +56,7 @@ export default function Index() {
 - Обременения: [есть/нет, какие]
 - Документы на руках: [перечислить]
 
-Вопрос: [порядок покупки/проверка документов/регистрация права]`
+Вопрос: [порядок покупки/проверка документов/регистрация права]`,
     },
     {
       title: "Межевание",
@@ -73,7 +73,7 @@ export default function Index() {
 
 Документы: [какие есть]
 
-Вопрос: [процедура межевания/разрешение споров/исправление ошибок]`
+Вопрос: [процедура межевания/разрешение споров/исправление ошибок]`,
     },
     {
       title: "Наследование земли",
@@ -88,7 +88,7 @@ export default function Index() {
 - [количество, очередь наследования]
 - [согласие между наследниками: есть/нет]
 
-Вопрос: [оформление наследства/раздел участка/налоги]`
+Вопрос: [оформление наследства/раздел участка/налоги]`,
     },
     {
       title: "Смена назначения",
@@ -102,7 +102,7 @@ export default function Index() {
 
 Документы: [какие есть]
 
-Вопрос: [процедура изменения/требования/сроки]`
+Вопрос: [процедура изменения/требования/сроки]`,
     },
     {
       title: "Участки для фермеров",
@@ -118,7 +118,7 @@ export default function Index() {
 - [как получить землю]
 - [льготы для фермеров]
 - [требования к КФХ]
-- [субсидии и поддержка]`
+- [субсидии и поддержка]`,
     },
     {
       title: "Споры с соседями",
@@ -135,7 +135,7 @@ export default function Index() {
 
 Доказательства: [фото/документы/свидетели]
 
-Вопрос: [как защитить права/досудебное урегулирование/иск в суд]`
+Вопрос: [как защитить права/досудебное урегулирование/иск в суд]`,
     },
     {
       title: "Приватизация земли",
@@ -149,8 +149,8 @@ export default function Index() {
 
 Строения на участке: [есть/нет, какие]
 
-Вопрос: [процедура приватизации/документы/сроки/стоимость]`
-    }
+Вопрос: [процедура приватизации/документы/сроки/стоимость]`,
+    },
   ];
 
   const useTemplate = (template: string) => {
@@ -208,28 +208,32 @@ export default function Index() {
     {
       icon: "Home",
       title: "Право собственности",
-      description: "Регистрация права, приватизация, наследование земельных участков",
+      description:
+        "Регистрация права, приватизация, наследование земельных участков",
     },
     {
       icon: "RefreshCw",
       title: "Изменение назначения",
-      description: "Перевод земли из одной категории в другую, смена вида разрешенного использования",
+      description:
+        "Перевод земли из одной категории в другую, смена вида разрешенного использования",
     },
     {
       icon: "Tractor",
       title: "КФХ и сельхозземли",
-      description: "Оформление фермерских хозяйств, аренда сельхозземель, субсидии и льготы",
+      description:
+        "Оформление фермерских хозяйств, аренда сельхозземель, субсидии и льготы",
     },
     {
       icon: "Scale",
       title: "Земельные споры",
-      description: "Споры о границах, незаконное использование, защита прав на землю в суде",
+      description:
+        "Споры о границах, незаконное использование, защита прав на землю в суде",
     },
   ];
 
   const faqItems = [
     {
-      question: 'Как работает ИИ "Земельный юрист"?',
+      question: 'Как работает ИИ "Земский юрист"?',
       answer:
         "ИИ использует технологию RAG - находит нужные статьи Земельного кодекса РФ, законов о собственности, постановлений Пленума Верховного Суда, затем формирует понятный ответ с указанием конкретных норм права.",
     },
@@ -269,11 +273,19 @@ export default function Index() {
               <Icon name="Sprout" className="text-white" size={24} />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-green-900">Земельный юрист</h1>
-              <p className="text-xs text-green-700">ИИ-ассистент по земельному праву</p>
+              <h1 className="text-xl font-bold text-green-900">
+                Земский юрист
+              </h1>
+              <p className="text-xs text-green-700">
+                ИИ-ассистент по земельному праву
+              </p>
             </div>
           </div>
-          <Button variant="outline" size="sm" className="border-green-300 text-green-700 hover:bg-green-50">
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-green-300 text-green-700 hover:bg-green-50"
+          >
             <Icon name="Phone" className="mr-2" size={16} />
             Связаться с юристом
           </Button>
@@ -296,7 +308,8 @@ export default function Index() {
             <span className="text-green-200">по земельному праву</span>
           </h2>
           <p className="text-xl mb-8 text-green-100 max-w-3xl mx-auto">
-            ИИ-ассистент даст ответ за 10 секунд на основе Земельного кодекса РФ и актуальной судебной практики
+            ИИ-ассистент даст ответ за 10 секунд на основе Земельного кодекса РФ
+            и актуальной судебной практики
           </p>
           <div className="flex flex-wrap gap-4 justify-center text-sm">
             <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/30">
@@ -323,7 +336,8 @@ export default function Index() {
               Задайте вопрос земельному юристу
             </CardTitle>
             <CardDescription className="text-green-700">
-              Опишите вашу ситуацию подробно, чтобы получить точный ответ со ссылками на законы
+              Опишите вашу ситуацию подробно, чтобы получить точный ответ со
+              ссылками на законы
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-6 space-y-4">
@@ -348,9 +362,15 @@ export default function Index() {
                     className="flex items-center gap-3 p-3 bg-white border border-green-200 rounded-lg hover:bg-green-50 hover:border-green-400 transition-all text-left group"
                   >
                     <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-600 transition-colors">
-                      <Icon name={template.icon} className="text-green-700 group-hover:text-white" size={20} />
+                      <Icon
+                        name={template.icon}
+                        className="text-green-700 group-hover:text-white"
+                        size={20}
+                      />
                     </div>
-                    <span className="font-medium text-green-900">{template.title}</span>
+                    <span className="font-medium text-green-900">
+                      {template.title}
+                    </span>
                   </button>
                 ))}
               </div>
@@ -388,7 +408,9 @@ export default function Index() {
                     <Icon name="Scale" className="text-white" size={20} />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-bold text-lg text-green-900 mb-2">Юридическая консультация</h3>
+                    <h3 className="font-bold text-lg text-green-900 mb-2">
+                      Юридическая консультация
+                    </h3>
                     <div className="prose max-w-none text-green-900 whitespace-pre-wrap leading-relaxed">
                       {answer}
                     </div>
@@ -410,7 +432,11 @@ export default function Index() {
                           rel="noopener noreferrer"
                           className="flex items-start gap-3 p-3 bg-white hover:bg-green-50 border border-green-200 rounded-lg transition-all group"
                         >
-                          <Icon name="ExternalLink" className="text-green-600 mt-1 group-hover:text-green-700" size={16} />
+                          <Icon
+                            name="ExternalLink"
+                            className="text-green-600 mt-1 group-hover:text-green-700"
+                            size={16}
+                          />
                           <div className="flex-1 min-w-0">
                             <div className="font-medium text-green-900 text-sm">
                               {source.code}
@@ -433,7 +459,9 @@ export default function Index() {
       <section className="py-16 bg-gradient-to-br from-green-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4 text-green-900">Направления консультаций</h2>
+            <h2 className="text-3xl font-bold mb-4 text-green-900">
+              Направления консультаций
+            </h2>
             <p className="text-green-700 max-w-2xl mx-auto">
               ИИ-ассистент поможет разобраться в любых вопросах земельного права
             </p>
@@ -446,9 +474,15 @@ export default function Index() {
               >
                 <CardHeader>
                   <div className="w-14 h-14 bg-gradient-to-br from-green-600 to-green-700 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg">
-                    <Icon name={service.icon} className="text-white" size={28} />
+                    <Icon
+                      name={service.icon}
+                      className="text-white"
+                      size={28}
+                    />
                   </div>
-                  <CardTitle className="text-xl text-green-900">{service.title}</CardTitle>
+                  <CardTitle className="text-xl text-green-900">
+                    {service.title}
+                  </CardTitle>
                   <CardDescription className="text-green-700 leading-relaxed">
                     {service.description}
                   </CardDescription>
@@ -491,10 +525,11 @@ export default function Index() {
                 <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center">
                   <Icon name="Sprout" className="text-white" size={24} />
                 </div>
-                <span className="font-bold text-xl">Земельный юрист</span>
+                <span className="font-bold text-xl">Земский юрист</span>
               </div>
               <p className="text-green-200 text-sm leading-relaxed">
-                Бесплатные юридические консультации по земельному праву на базе искусственного интеллекта и Земельного кодекса РФ
+                Бесплатные юридические консультации по земельному праву на базе
+                искусственного интеллекта и Земельного кодекса РФ
               </p>
             </div>
             <div>
@@ -521,16 +556,21 @@ export default function Index() {
             <div>
               <h4 className="font-bold mb-4 text-green-100">Контакты</h4>
               <p className="text-sm text-green-200 mb-4">
-                Для сложных дел и судебного представительства рекомендуем консультацию с практикующим юристом
+                Для сложных дел и судебного представительства рекомендуем
+                консультацию с практикующим юристом
               </p>
-              <Button variant="outline" className="border-green-400 text-green-100 hover:bg-white/10">
+              <Button
+                variant="outline"
+                className="border-green-400 text-green-100 hover:bg-white/10"
+              >
                 <Icon name="Phone" className="mr-2" size={16} />
                 Связаться с юристом
               </Button>
             </div>
           </div>
           <div className="border-t border-green-700 mt-8 pt-8 text-center text-sm text-green-300">
-            © 2024 Земельный юрист ИИ. Информационный сервис. Не является юридической фирмой.
+            © 2025 Земский юрист ИИ. Информационный сервис. Не является
+            юридической фирмой.
           </div>
         </div>
       </footer>
