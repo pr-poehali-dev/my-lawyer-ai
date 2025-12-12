@@ -22,7 +22,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Max-Age': '86400'
             },
-            'body': ''
+            'body': '',
+            'isBase64Encoded': False
         }
     
     sync_function_url = os.environ.get('LEGAL_SYNC_URL', 'https://functions.poehali.dev/f1c69854-1969-4039-8091-7ea77b37bdec')
@@ -48,7 +49,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     'message': 'Автообновление законодательства запущено успешно',
                     'sync_result': response_data,
                     'request_id': context.request_id
-                })
+                }, ensure_ascii=False),
+                'isBase64Encoded': False
             }
     
     except urllib.error.HTTPError as e:
@@ -60,7 +62,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'success': False,
                 'error': f'HTTP {e.code}: {error_body}',
                 'request_id': context.request_id
-            })
+            }, ensure_ascii=False),
+            'isBase64Encoded': False
         }
     
     except Exception as e:
@@ -71,5 +74,6 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'success': False,
                 'error': str(e),
                 'request_id': context.request_id
-            })
+            }, ensure_ascii=False),
+            'isBase64Encoded': False
         }

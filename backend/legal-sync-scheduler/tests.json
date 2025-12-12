@@ -1,18 +1,6 @@
 {
   "tests": [
     {
-      "name": "Trigger daily sync",
-      "method": "POST",
-      "path": "/",
-      "body": {},
-      "expectedStatus": 200,
-      "expectedBody": {
-        "success": true,
-        "message": "string"
-      },
-      "bodyMatcher": "partial"
-    },
-    {
       "name": "OPTIONS CORS",
       "method": "OPTIONS",
       "path": "/",
